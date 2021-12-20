@@ -4,8 +4,8 @@ import { Connection } from 'typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Product } from './products/product.entity';
-import { ProductsModule } from './products/products.module';
+import { Product } from './Modules/Products/Product.entity';
+import * as Modules from './Modules';
 
 const {
   MYSQL_USERNAME,
@@ -27,7 +27,7 @@ const {
       entities: [Product],
       synchronize: true,
     }),
-    ProductsModule,
+    ...Object.values(Modules),
   ],
   controllers: [AppController],
   providers: [AppService],
