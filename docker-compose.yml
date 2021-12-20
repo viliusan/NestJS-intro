@@ -1,0 +1,26 @@
+version: '3'
+services:
+  app_nestjs_one:
+    build: .
+    command: 'npm run start:dev'
+    volumes:
+      - '/usr/src/app/node_modules'
+      - './:/usr/src/app'
+    env_file: .env
+    ports:
+      - ${API_PORT}:${API_PORT}
+    links:
+      - mysqldb
+
+  mysqldb:
+    image: mysql
+    restart: always
+    env_file: .env
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    container_name: ${MYSQL_HOST}
+    logging:
+      driver: 'none'
