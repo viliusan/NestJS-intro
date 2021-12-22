@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Product } from './Modules/Products/Product.entity';
 import * as Modules from './Modules';
+import { User } from './Modules/Users/User.entity';
 
 const {
   MYSQL_USERNAME,
@@ -24,7 +25,7 @@ const {
       username: MYSQL_USERNAME,
       password: MYSQL_PASSWORD,
       database: MYSQL_DATABASE,
-      entities: [Product],
+      entities: [Product, User],
       synchronize: true,
     }),
     ...Object.values(Modules),
