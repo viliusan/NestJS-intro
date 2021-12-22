@@ -1,4 +1,5 @@
 import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { CreateProductDTO } from './dtos/CreateProduct.dto';
 import { ProductsService } from './Products.service';
 
 @Controller('products')
@@ -6,16 +7,8 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-  insertProduct(
-    @Body('title') title: string,
-    @Body('description') description: string,
-    @Body('price') price: number,
-  ) {
-    const product = this.productsService.insertProduct({
-      title,
-      description,
-      price,
-    });
+  insertProduct(@Body() body: CreateProductDTO) {
+    const product = this.productsService.insertProduct(body);
 
     return product;
   }
